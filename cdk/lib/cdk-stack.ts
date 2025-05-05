@@ -55,6 +55,7 @@ export class CdkStack extends cdk.Stack {
       "hot-reload"
     )
 
+    console.log("CODE PATHZ", path.join(__dirname, lambdaPath))
     const todoLambda = new Function(this, "LambdaFunctionTodo", {
       functionName: "Todo",
       runtime: Runtime.NODEJS_18_X,

@@ -6,8 +6,8 @@ import axios from "axios"
 
 import config from "../.local.json"
 import { useEffect, useState } from "react"
-// const API_URL = `http://${config.apiId}.execute-api.localhost.localstack.cloud:4566/prod/todo`
-const API_URL = ` http://localhost:4566/restapis/${config.apiId}/test/_user_request_/todo`
+const API_URL = `http://${config.apiId}.execute-api.localhost.localstack.cloud:4566/prod/todo`
+// const API_URL = ` http://localhost:4566/restapis/${config.apiId}/test/_user_request_/todo`
 
 export default function Home() {
   const read = async () => {

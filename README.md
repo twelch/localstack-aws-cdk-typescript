@@ -78,6 +78,19 @@ Where:
 - d is for Daemon mode
 - no banner remove the ASCII style banner (might cause trouble with Windows)
 
+## Update hosts file
+
+- [Add to /etc/hosts](https://github.com/localstack/localstack/issues/12280)
+```
+127.0.0.1   localhost.localstack.cloud
+```
+
+## Update s3 endpoint
+
+Got error first time, ENOTFOUND for s3 url.  This seemed like the issue
+https://github.com/localstack/aws-cdk-local/issues/110
+Played around a bunch and it eventually worked, shrug. Did not need to set AWS_ENDPOINT_URL, not sure why
+
 ## Stop
 
     localstack stop
@@ -322,3 +335,25 @@ Where possible, please also submit a [pull request](https://github.com/aws-sampl
 # License
 
 This sample code is made available under the MIT-0 license. See the LICENSE file. 
+
+
+# ToDo
+
+Erroring with log files in LocalStack desktop, may be due to newer version bugs.
+  - Try to manually check - https://github.com/localstack/localstack/issues/2003
+  - awslocal logs describe-log-groups --endpoint-u
+rl http://localhost:4566 suggests no log groups are getting created. check what gp does
+  - Consider switching to older aws-cdk and older 2.19.2 for aws-cdk-local.  See changelog for matching version (https://github.com/localstack/aws-cdk-local?tab=readme-ov-file#change-log)
+
+Lambda error, can't find index.handler
+  - confirmed index.js has a module.exports = ... and requiring the module using commonjs node REPL that it has an index.handler export
+  - `localstack logs` command shows the lambda error  
+  - can also try DEBUG=1 and set log level (https://docs.localstack.cloud/references/logging/)
+  - Switch to ESM module build using esbuild as figured out with geoprocessing
+  - Verify can deploy to LS using simple esm javascript code hello world
+
+Verify can deploy to aws directly.
+  - can invoke lambda
+  - log group created
+
+Switch to using .env files with next app to load
